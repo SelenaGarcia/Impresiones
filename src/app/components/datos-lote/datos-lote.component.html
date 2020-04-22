@@ -1,0 +1,73 @@
+<div class="viewer" fxLayout="column">
+    <form [formGroup]="loteForm" (ngSubmit)="onSubmit()">
+        <div formGroupName="datosLote">
+            <div class="container">
+                <div>
+                    <mat-form-field>
+                        <mat-label>N° de Lote</mat-label>
+                        <input matInput formControlName="numeroLote" readonly>
+                    </mat-form-field>
+                    <button mat-button color="accent" matSuffix mat-icon-button aria-label="Search"
+                        (click)="openDialog()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div class="container">
+                <div>
+                    <mat-form-field class="full-width">
+                        <mat-label>Impuesto</mat-label>
+                        <input matInput formControlName="impuesto" readonly>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="container">
+                <div>
+                    <mat-form-field>
+                        <mat-label>Cant. Emisiones</mat-label>
+                        <input matInput formControlName="cantidad" readonly>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="two">
+                    <mat-form-field class="full-width">
+                        <mat-label>Tipo Generación</mat-label>
+                        <input matInput formControlName="tipoGeneracion" readonly>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Período Fiscal</mat-label>
+                        <input matInput formControlName="periodoFiscal" readonly>
+                    </mat-form-field>
+                </div>
+                
+            </div>
+        </div>
+        <div class="container" *ngIf="loteForm.controls['datosLote'].valid">
+            <div>
+                <mat-form-field>
+                    <mat-label>Salto</mat-label>
+                    <input matInput formControlName="salto" type="number" #numberVar (change)="onChange(numberVar.value)">
+                </mat-form-field>
+            </div>
+            <div fxFlex="three">
+                <mat-form-field class="full-width">
+                    <mat-label>Impresora</mat-label>
+                    <mat-select formControlName="impresora">
+                        <mat-option *ngFor="let imp of impresoras$ | async" [value]="imp">
+                            {{imp}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Botón Agregar -->
+        <div fxLayoutAlign="end center">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!loteForm.valid">Agregar</button>
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,63 @@
+<h1 mat-dialog-title fxLayout="row" fxLayoutAlign="center center">Lista de Lotes</h1>
+
+<mat-dialog-content>
+
+    <div class="spinner-container" fxLayoutAlign="center center" *ngIf="this.lotesService.isLoading$ | async">
+        <mat-spinner></mat-spinner>
+    </div>
+
+    <mat-form-field>
+        <input matInput placeholder="Buscar" (keyup)="applyFilter($event.target.value)">
+    </mat-form-field>
+    <div class="table-container">
+
+        <table mat-table class="table-hover" [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> </th>
+                <td mat-cell *matCellDef="let element">{{element.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="numeroLote">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> No. Lote </th>
+                <td mat-cell *matCellDef="let element"> {{element.numeroLote}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="impuesto">
+                <th mat-header-cell *matHeaderCellDef> Impuesto </th>
+                <td mat-cell *matCellDef="let element"> {{element.impuesto}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tipoGeneracion">
+                <th mat-header-cell *matHeaderCellDef  mat-sort-header> Tipo de Generación </th>
+                <td mat-cell *matCellDef="let element"> {{element.tipoGeneracion}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="periodoFiscal">
+                <th mat-header-cell *matHeaderCellDef  mat-sort-header> Período Fiscal </th>
+                <td mat-cell *matCellDef="let element"> {{element.periodoFiscal}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="estadoLote">
+                <th mat-header-cell *matHeaderCellDef  mat-sort-header> Estado del Lote </th>
+                <td mat-cell *matCellDef="let element"> {{element.estadoLote}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="cantidad">
+                <th mat-header-cell *matHeaderCellDef  mat-sort-header> Cantidad </th>
+                <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelectRow(row)">
+            </tr>
+        </table>
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+</mat-dialog-content>
+
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onClose()">Cerrar</button>
+</div>

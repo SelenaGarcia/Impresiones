@@ -1,0 +1,24 @@
+div.container
+{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+div.container > div
+{
+    flex: 1 1 5em;
+    margin-left: 10px;
+}
+.full-width {
+    width: 100%;
+ }
+
+.two
+{
+    flex:2 2 calc(10em + 10px); /** 10px is the missing margin of the missing box */
+}
+
+.three{
+    flex:3 3 calc(10em + 10px); /** 10px is the missing margin of the missing box */
+}
+
